@@ -8,8 +8,13 @@ import org.bukkit.boss.BossBar;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scoreboard.Scoreboard;
 
+import java.util.HashMap;
+import java.util.UUID;
+
 public class Main extends JavaPlugin {
     public static int time = 0;
+
+    public static HashMap<UUID, Boolean> isAlive = new HashMap<>();
 
     @Override
     public void onEnable() {
@@ -24,5 +29,9 @@ public class Main extends JavaPlugin {
     @Override
     public void onDisable() {
         getLogger().info("BattleRoyalePlugin has been disabled!");
+    }
+
+    public static HashMap<UUID, Boolean> getIsAlive() {
+        return isAlive;
     }
 }

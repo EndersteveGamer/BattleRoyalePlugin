@@ -11,6 +11,7 @@ public class OnJoin implements Listener {
     @EventHandler
     public static void onJoin(org.bukkit.event.player.PlayerJoinEvent event) {
         BuildLobby.buildLobby();
+        event.getPlayer().getInventory().clear();
         event.getPlayer().setGameMode(GameMode.ADVENTURE);
         event.getPlayer().teleport(new Location(Bukkit.getWorld("world"), 0, 302, 0));
     }

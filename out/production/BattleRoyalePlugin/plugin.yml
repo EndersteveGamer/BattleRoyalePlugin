@@ -1,0 +1,11 @@
+main: fr.enderstevegamer.battleroyaleplugin.Main
+name: BattleRoyalePlugin
+version: 1.0
+api-version: 1.17
+commands:
+  startgame:
+    description: Starts the game
+    permission: battleroyaleplugin.triggerEvent
+    permission-message: You don't have the permission to start the game
+    aliases: [sg]
+    tab-completer: fr.enderstevegamer.battleroyaleplugin.TabCompleter

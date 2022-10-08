@@ -6,7 +6,13 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
 import org.bukkit.inventory.ItemStack;
-public class PlaceChest {
+import org.bukkit.scheduler.BukkitRunnable;
+
+public class PlaceChest extends BukkitRunnable {
+    @Override
+    public void run() {
+        placeChest();
+    }
     public static void placeChest() {
         // Place chest
         int chestX = (int) (Math.random() * (250 - (-250) + 1)) + (-250);
@@ -18,8 +24,7 @@ public class PlaceChest {
         for (int temp = 0; temp <= 10; temp++) {
             if (Bukkit.getWorld("world").getBlockAt(chestX, tempY, chestZ).isPassable()) {
                 tempY--;
-            }
-            else {
+            } else {
                 highestBlockY = tempY + 2;
             }
         }
@@ -35,7 +40,7 @@ public class PlaceChest {
         int weaponType = (int) (Math.random() * 10);
 
         Material weaponMaterial;
-        switch (weaponType){
+        switch (weaponType) {
             case 0 -> weaponMaterial = Material.STONE_SWORD;
             case 1 -> weaponMaterial = Material.GOLDEN_SWORD;
             case 2 -> weaponMaterial = Material.IRON_SWORD;
@@ -112,15 +117,12 @@ public class PlaceChest {
         itemStack = new ItemStack(blockMaterial);
         itemStack.setAmount(blockNum);
 
+        chest.getInventory().addItem(itemStack);
+
         // Add armor
         random = Math.random();
         boolean hasArmor;
-        if (random > 0.5) {
-            hasArmor = true;
-        }
-        else {
-            hasArmor = false;
-        }
+        hasArmor = random > 0.5;
 
         int armorType = (int) (Math.random() * 10);
         Material armorMaterial = switch (armorType) {
@@ -149,14 +151,10 @@ public class PlaceChest {
             chest.getInventory().addItem(itemStack);
         }
 
-        chest.getInventory().addItem(itemStack);
-
         chest.getLocation().setWorld(Bukkit.getWorld("world"));
         chest.getLocation().setX(chestX);
         chest.getLocation().setZ(chestZ);
         chest.getLocation().setY(highestBlockY);
         Bukkit.getWorld("world").setBlockData(chest.getLocation(), chest.getBlockData());
-
-        Bukkit.getConsoleSender().sendMessage("Chest: " + chest.getLocation().getX() + " " + chest.getLocation().getY() + " " + chest.getLocation().getZ());
     }
 }

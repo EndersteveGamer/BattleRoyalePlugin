@@ -2,6 +2,7 @@ package fr.enderstevegamer.battleroyaleplugin.commands;
 
 import fr.enderstevegamer.battleroyaleplugin.Main;
 import fr.enderstevegamer.battleroyaleplugin.PlaceChest;
+import fr.enderstevegamer.battleroyaleplugin.TpPlayers;
 import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -20,26 +21,11 @@ public class StartGame implements CommandExecutor {
 
         // Place chests
         for (int chestNum = 0; chestNum < 100; chestNum++) {
-            PlaceChest.placeChest();
+            Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), PlaceChest::placeChest, 20 * chestNum);
         }
 
-        // TP players
-        for (Player player : Bukkit.getOnlinePlayers()){
-            int playerX = (int) (Math.random() * (250 - (-250) + 1)) + (-250);
-            int playerZ = (int) (Math.random() * (250 - (-250) + 1)) + (-250);
-
-            player.teleport(new Location(Bukkit.getWorld("world"), playerX, Bukkit.getWorld("world").getHighestBlockYAt(playerX, playerZ), playerZ));
-            player.setGameMode(GameMode.SURVIVAL);
-        }
-
-        // Send game started
-        commandSender.sendMessage(ChatColor.GREEN + "Game started!");
-
-        // Save if player is alive
-        Main.getIsAlive().clear();
-        for (Player player : Bukkit.getOnlinePlayers()){
-            Main.getIsAlive().put(player.getUniqueId(), true);
-        }
+        // Start game
+        Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), TpPlayers::tpPlayers, 20 * 100);
         return false;
     }
 }

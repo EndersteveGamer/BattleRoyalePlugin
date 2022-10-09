@@ -5,9 +5,14 @@ import fr.enderstevegamer.battleroyaleplugin.GetAliveNumber;
 import fr.enderstevegamer.battleroyaleplugin.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
+import org.bukkit.Location;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
 public class OnDeath implements Listener {
+    @EventHandler
     public static void onDeath(org.bukkit.event.entity.PlayerDeathEvent event) {
         // Death message
         event.setDeathMessage(null);
@@ -23,6 +28,14 @@ public class OnDeath implements Listener {
 
         // Set killed to dead
         Main.getIsAlive().put(event.getEntity().getUniqueId(), false);
+
+        // Set killed to spectator
+        event.getEntity().setGameMode(GameMode.SPECTATOR);
+
+        // Re-TP killed
+        Location pos =  event.getEntity().getLocation();
+        event.getEntity().spigot().respawn();
+        event.getEntity().teleport(pos);
 
         // Add kill to killer
         if (wasKilledByPlayer) {

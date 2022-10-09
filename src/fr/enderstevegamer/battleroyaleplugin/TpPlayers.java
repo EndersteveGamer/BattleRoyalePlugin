@@ -22,6 +22,9 @@ public class TpPlayers extends BukkitRunnable {
 
             player.teleport(new Location(Bukkit.getWorld("world"), playerX, Bukkit.getWorld("world").getHighestBlockYAt(playerX, playerZ), playerZ));
             player.setGameMode(GameMode.SURVIVAL);
+
+            // Reset title
+            player.sendTitle("", "", 0, 0, 0);
         }
 
         // Send game started

@@ -21,11 +21,14 @@ public class StartGame implements CommandExecutor {
 
         // Place chests
         for (int chestNum = 0; chestNum < 100; chestNum++) {
-            Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), PlaceChest::placeChest, 20 * chestNum);
+            Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), PlaceChest::placeChest, chestNum);
         }
 
+        // Set immediate respawn
+        Bukkit.getWorld("world").setGameRule(GameRule.DO_IMMEDIATE_RESPAWN, true);
+
         // Start game
-        Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), TpPlayers::tpPlayers, 20 * 100);
+        Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), TpPlayers::tpPlayers, 100);
         return false;
     }
 }

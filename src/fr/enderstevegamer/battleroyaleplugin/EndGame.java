@@ -2,6 +2,7 @@ package fr.enderstevegamer.battleroyaleplugin;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.GameRule;
 import org.bukkit.entity.Player;
 
 import java.util.UUID;
@@ -28,5 +29,8 @@ public class EndGame {
                 player.sendTitle(ChatColor.RED + "Game Over!", winner + " won!", 10, 70, 20);
             }
         }
+
+        // Disable immediate respawn
+        Bukkit.getWorld("world").setGameRule(GameRule.DO_IMMEDIATE_RESPAWN, false);
     }
 }

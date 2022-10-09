@@ -1,10 +1,12 @@
 package fr.enderstevegamer.battleroyaleplugin;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -156,5 +158,11 @@ public class PlaceChest extends BukkitRunnable {
         chest.getLocation().setZ(chestZ);
         chest.getLocation().setY(highestBlockY);
         Bukkit.getWorld("world").setBlockData(chest.getLocation(), chest.getBlockData());
+
+        // Show generated chests
+        Main.setGeneratedChests(Main.getGeneratedChests() + 1);
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            player.sendTitle(ChatColor.GREEN + "Generating chests...", ChatColor.GREEN + "Generated chests: " + Main.getGeneratedChests() + " / 100", 0, 200, 0);
+        }
     }
 }

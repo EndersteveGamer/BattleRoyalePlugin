@@ -5,9 +5,7 @@ import fr.enderstevegamer.battleroyaleplugin.listeners.OnBreak;
 import fr.enderstevegamer.battleroyaleplugin.listeners.OnDeath;
 import fr.enderstevegamer.battleroyaleplugin.listeners.OnJoin;
 import org.bukkit.Bukkit;
-import org.bukkit.boss.BossBar;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scoreboard.Scoreboard;
 
 import java.util.HashMap;
 import java.util.UUID;
@@ -16,6 +14,8 @@ public class Main extends JavaPlugin {
 
     private static Main instance;
     public static int time = 0;
+
+    public static int generatedChests = 0;
 
     public static HashMap<UUID, Boolean> isAlive = new HashMap<>();
 
@@ -48,5 +48,13 @@ public class Main extends JavaPlugin {
 
     public static Main getInstance() {
         return instance;
+    }
+
+    public static void setGeneratedChests(int generatedChests) {
+        Main.generatedChests = generatedChests;
+    }
+
+    public static int getGeneratedChests() {
+        return generatedChests;
     }
 }

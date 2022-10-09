@@ -57,7 +57,7 @@ public class OnDeath implements Listener {
 
         // Check end of game
         if (GetAliveNumber.getAliveNumber() <= 1) {
-            EndGame.endGame();
+            Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getPlugin(Main.class), EndGame::endGame, 1);
         }
     }
 }

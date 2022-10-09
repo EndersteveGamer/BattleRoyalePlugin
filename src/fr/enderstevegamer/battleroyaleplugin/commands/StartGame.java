@@ -13,12 +13,6 @@ public class StartGame implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "worldborder set 500");
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "worldborder damage amount 1");
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "worldborder damage buffer 2");
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "worldborder warning distance 10");
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "worldborder set 16 900");
-
         // Place chests
         for (int chestNum = 0; chestNum < 100; chestNum++) {
             Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), PlaceChest::placeChest, chestNum);
@@ -29,6 +23,13 @@ public class StartGame implements CommandExecutor {
 
         // Start game
         Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), TpPlayers::tpPlayers, 100);
+
+        // Set worldborder
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "worldborder set 500");
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "worldborder damage amount 1");
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "worldborder damage buffer 2");
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "worldborder warning distance 10");
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "worldborder set 16 900");
         return false;
     }
 }

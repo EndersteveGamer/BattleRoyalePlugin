@@ -4,10 +4,11 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameRule;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.UUID;
 
-public class EndGame {
+public class EndGame extends BukkitRunnable {
     public static void endGame() {
         // Get winner
         String winner = "Nobody";
@@ -20,7 +21,7 @@ public class EndGame {
 
         // Send titles
         for (int i = 0; i < Main.getIsAlive().size(); i++) {
-            Player player = Bukkit.getPlayer(Main.getIsAlive().keySet().toArray()[i].toString());
+            Player player = Bukkit.getPlayer((UUID) Main.getIsAlive().keySet().toArray()[i]);
             boolean isAlive = Main.getIsAlive().get(player.getUniqueId());
 
             if (isAlive) {
@@ -32,5 +33,10 @@ public class EndGame {
 
         // Disable immediate respawn
         Bukkit.getWorld("world").setGameRule(GameRule.DO_IMMEDIATE_RESPAWN, false);
+    }
+
+    @Override
+    public void run() {
+        endGame();
     }
 }

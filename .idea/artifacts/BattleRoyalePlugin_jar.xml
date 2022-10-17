@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" build-on-make="true" name="BattleRoyalePlugin:jar">
-    <output-path>$PROJECT_DIR$/../../../../Mods et serveurs Minecraft/serveurs/Serveur Plugin BattleRoyalePlugin/plugins</output-path>
-    <root id="archive" name="BattleRoyalePlugin.jar">
-      <element id="module-output" name="BattleRoyalePlugin" />
-    </root>
-  </artifact>
-</component>

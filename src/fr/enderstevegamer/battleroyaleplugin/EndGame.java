@@ -31,6 +31,13 @@ public class EndGame extends BukkitRunnable {
             }
         }
 
+        // Display kills
+        for (int i = 0; i < Main.getIsAlive().size(); i++) {
+            Player player = Bukkit.getPlayer((UUID) Main.getIsAlive().keySet().toArray()[i]);
+            int kills = Main.getKills().get(player.getUniqueId());
+            player.sendMessage(ChatColor.GREEN + player.getName() + " killed " + kills + " players!");
+        }
+
         // Disable immediate respawn
         Bukkit.getWorld("world").setGameRule(GameRule.DO_IMMEDIATE_RESPAWN, false);
     }
